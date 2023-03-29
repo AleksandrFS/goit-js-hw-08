@@ -14,26 +14,25 @@ messageInputBeforeFault();
 const allInputData = {};
 
 function onInput(e) {
-    // console.log(e.target.name)
-    // console.log(e.target.value);
-    allInputData[e.target.name] = e.target.value;
-    localStorage.setItem(STORAGE_INPUT_KEY, JSON.stringify(allInputData));
+  // console.log(e.target.name)
+  // console.log(e.target.value);
+  allInputData[e.target.name] = e.target.value;
+  localStorage.setItem(STORAGE_INPUT_KEY, JSON.stringify(allInputData));
 }
 
 function onFormSubmit(e) {
-    e.preventDefault();
-    console.log(allInputData);
-    e.currentTarget.reset();
-    localStorage.removeItem(STORAGE_INPUT_KEY);
+  e.preventDefault();
+  console.log(allInputData);
+  e.currentTarget.reset();
+  localStorage.removeItem(STORAGE_INPUT_KEY);
 }
 
 function messageInputBeforeFault() {
+  const savedMessageInput = localStorage.getItem(STORAGE_INPUT_KEY);
+  const parsedSavedMessageInput = JSON.parse(savedMessageInput);
 
-    const savedMessageInput = localStorage.getItem(STORAGE_INPUT_KEY);
-    const parsedSavedMessageInput = JSON.parse(savedMessageInput);
-
-    if (parsedSavedMessageInput) {
-        textareaRef.value = parsedSavedMessageInput.message;
-        inputRef.value = parsedSavedMessageInput.email;
-    }
+  if (parsedSavedMessageInput) {
+    textareaRef.value = parsedSavedMessageInput.message;
+    inputRef.value = parsedSavedMessageInput.email;
+  }
 }
