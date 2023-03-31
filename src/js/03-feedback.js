@@ -18,10 +18,12 @@ function onInput(e) {
 
 function onFormSubmit(e) {
   e.preventDefault();
-  e.target.reset();
-  console.log(allInputData);
-  localStorage.removeItem(STORAGE_INPUT_KEY);
-  allInputData = {};
+  inputRef.value === '' || textareaRef.value === ''
+    ? alert('Необходимо заполнить все поля!')
+    : (console.log(allInputData),
+      e.currentTarget.reset(),
+      localStorage.removeItem(STORAGE_INPUT_KEY),
+      (allInputData = {}));
 }
 
 messageInputBeforeFault();
@@ -39,11 +41,14 @@ function messageInputBeforeFault() {
     ) {
       inputRef.value = parsedSavedMessageInput.email;
       textareaRef.value = parsedSavedMessageInput.message;
+      allInputData.email = parsedSavedMessageInput.email;
+      allInputData.message = parsedSavedMessageInput.message;
     } else if (parsedSavedMessageInput['email']) {
       inputRef.value = parsedSavedMessageInput.email;
+      allInputData.email = parsedSavedMessageInput.email;
     } else if (parsedSavedMessageInput['message']) {
-      console.log(parsedSavedMessageInput['message']);
       textareaRef.value = parsedSavedMessageInput.message;
+      allInputData.message = parsedSavedMessageInput.message;
     }
   }
 }
